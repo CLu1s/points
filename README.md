@@ -21,7 +21,7 @@ This project provides a user interface to calculate income taxes based on annual
 - **Axios** (HTTP client for API requests)
 - **Jest** and **React Testing Library** (Testing framework and utilities)
 - **Tailwind CSS** (For styling)
-
+- **Shadcn** (For UI components)
 ---
 
 ## Getting Started
