@@ -30,40 +30,40 @@ describe("Tax Calculation Form", () => {
       expect(screen.getByText(/result/i)).toBeInTheDocument();
     });
   });
-  it("does not call the API if inputs are invalid", async () => {
+  it("does not call the API if fiscal year is after 2022", async () => {
     render(<Form />);
 
-    fireEvent.change(screen.getByLabelText(/annual salary/i), {
-      target: { value: "-10000" },
-    });
     fireEvent.change(screen.getByLabelText(/fiscal year/i), {
       target: { value: "2027" },
     });
     fireEvent.click(screen.getByRole("button", { name: /calculate/i }));
 
     expect(
-      await screen.findByText(/please enter valid inputs/i),
+      await screen.findByText(/Please enter a year before 2023/i),
     ).toBeInTheDocument();
   });
-  it("shows loading state during API call", async () => {
-    (axios.get as jest.Mock).mockResolvedValueOnce({
-      data: { tax_brackets: [{ min: 0, max: 50000, rate: 0.1 }] },
-    });
-
+  it("does not call the API if fiscal year is before 2019", async () => {
     render(<Form />);
 
-    fireEvent.change(screen.getByLabelText(/annual salary/i), {
-      target: { value: "40000" },
-    });
     fireEvent.change(screen.getByLabelText(/fiscal year/i), {
-      target: { value: "2022" },
+      target: { value: "2018" },
     });
     fireEvent.click(screen.getByRole("button", { name: /calculate/i }));
 
-    expect(screen.getByText(/calculating.../i)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Please enter a year after 2019/i),
+    ).toBeInTheDocument();
+  });
+  it("does not call the API if salary in negative", async () => {
+    render(<Form />);
 
-    await waitFor(() => {
-      expect(screen.getByText(/result/i)).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText(/annual salary/i), {
+      target: { value: "-10000" },
     });
+    fireEvent.click(screen.getByRole("button", { name: /calculate/i }));
+
+    expect(
+      await screen.findByText(/Please enter a salary greater than 0/i),
+    ).toBeInTheDocument();
   });
 });

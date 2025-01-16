@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "format-money-js": "^1.6.3",
     "jest-environment-jsdom": "^29.7.0",
     "lucide-react": "^0.471.1",
     "next": "15.1.4",
