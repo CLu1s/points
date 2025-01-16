@@ -24,8 +24,8 @@ const ENDPOINT = "http://localhost:5001/tax-calculator/tax-year";
 const Form = () => {
   const [result, setResult] = useState<BandResult[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const [totalTax, setTotalTax] = useState<string | null>(null);
-  const [effectiveRate, setEffectiveRate] = useState<string | null>(null);
+  const [totalTax, setTotalTax] = useState<string>("");
+  const [effectiveRate, setEffectiveRate] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const {

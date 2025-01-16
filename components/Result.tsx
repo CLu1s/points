@@ -14,10 +14,15 @@ const Result = ({ result, totalTax, effectiveRate }: Props) => {
         <div>Total Taxes Owed: {totalTax}</div>
         <br />
         <h3>Breakdown:</h3>
-        <ul>
+        <ul className={"flex flex-col gap-1.5"}>
           {result.map((band: BandResult, index: number) => (
-            <li key={index}>
-              {band.band}: {band.tax}
+            <li
+              key={index}
+              className={"grid grid-cols-[minmax(210px,_1fr)_24px_1fr] gap-2"}
+            >
+              <span>{band.band}</span>
+              <span> → </span>
+              <span>{band.tax}</span>
             </li>
           ))}
         </ul>
