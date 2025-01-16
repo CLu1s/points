@@ -15,9 +15,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import formatMoney from "@/lib/formatMoney";
-import Result from "@/components/Result";
+import Result from "@/components/ui/Result";
 import { calculateTax } from "@/lib/calculateTax";
-import Spinner from "@/components/Spinner";
+import Spinner from "@/components/ui/Spinner";
 
 const ENDPOINT = "http://localhost:5001/tax-calculator/tax-year";
 

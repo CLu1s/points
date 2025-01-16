@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Form from "@/components/Form";
+import Form from "@/components/ui/Form";
 import { Calculator, Github } from "lucide-react";
 
 export default function Home() {
