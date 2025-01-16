@@ -37,8 +37,8 @@ Before starting, ensure you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/tax-calculator-ui.git
-   cd tax-calculator-ui
+   git clone https://github.com/CLu1s/points.git
+   cd points
     ```
 2. Install dependencies:
     
