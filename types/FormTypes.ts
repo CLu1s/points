@@ -8,3 +8,9 @@ export interface TaxBracket {
   max: number;
   rate: number;
 }
+
+export interface BandResult {
+  band: string;
+  tax: string;
+  rate: number;
+}

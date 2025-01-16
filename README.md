@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tax Calculator UI
+
+This project provides a user interface to calculate income taxes based on annual salary and fiscal year, using dynamic tax brackets from an external API. The app is built with **Next.js** and **TypeScript**, following **TDD principles** to ensure maintainable and reliable code.
+
+---
+
+## Features
+
+- Calculate **total taxes owed** based on annual salary.
+- Display **taxes owed per tax band**.
+- Show the **effective tax rate**.
+- Responsive and accessible UI.
+- Graceful error handling and user feedback.
+
+---
+
+## Technologies Used
+
+- **Next.js** (Frontend framework)
+- **TypeScript** (Type safety and enhanced development experience)
+- **Axios** (HTTP client for API requests)
+- **Jest** and **React Testing Library** (Testing framework and utilities)
+- **Tailwind CSS** (For styling)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Before starting, ensure you have the following installed:
+- Node.js (>=v20.10.x)
+- npm or yarn
+- Docker (optional, for running the API)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/tax-calculator-ui.git
+   cd tax-calculator-ui
+    ```
+2. Install dependencies:
+    
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+## API Setup
+The application depends on an external API for tax data. Follow these steps to set it up:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker pull ptsdocker16/interview-test-server
+docker run --init -p 5001:5001 -it ptsdocker16/interview-test-server
 ```
+The API will be available at:
+http://localhost:5001
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
+1. Enter your annual salary and the fiscal year in the form.
+2. Click the Calculate button.
+3. View the results, including:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   - Total taxes owed.
+   - Breakdown of taxes per band.
+   - Effective tax rate.
+### Example Output
+`Total Taxes Owed: $12,000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`Breakdown:`
+`$0 - $50,197: $7,529.55`
 
-## Learn More
+`$50,197 - $100,392: $4,470.45`
 
-To learn more about Next.js, take a look at the following resources:
+`Effective Tax Rate: 20%`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Testing
+Run the test suite to verify the app's functionality:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Execute tests:
+```bash
+npm test
+```
+Test coverage will be displayed in the terminal.
