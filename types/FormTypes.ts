@@ -12,5 +12,4 @@ export interface TaxBracket {
 export interface BandResult {
   band: string;
   tax: string;
-  rate: number;
 }

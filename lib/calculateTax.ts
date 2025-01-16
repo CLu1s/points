@@ -13,7 +13,6 @@ export const calculateTax = (salary: number, brackets: TaxBracket[]) => {
       breakdown.push({
         band: `${formatMoney(min)} - ${max ? `${formatMoney(max)}` : "above"}`,
         tax: `${formatMoney(taxForBand)}`,
-        rate: rate,
       });
     }
   });
