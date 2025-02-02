@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
 import { BandResult, Inputs } from "@/types/FormTypes";
 import { Button } from "@/components/ui/Button";
 import {
@@ -40,23 +39,33 @@ const Form = () => {
     setResult(null);
     setError(null);
     try {
-      const data = await fetchTaxBrackets(year);
-
+      const taxData = await fetchTaxBrackets(parseInt(year));
+      if (!taxData?.tax_brackets) {
+        throw new Error("Invalid tax data format");
+      }
       const { total, breakdown } = calculateTax(
         Number(salary),
-        data.tax_brackets,
+        taxData.tax_brackets,
       );
       setTotalTax(formatMoney(total));
       setEffectiveRate(
         `${((Number(total) / Number(salary)) * 100).toFixed(2)}%`,
       );
       setResult(breakdown);
-    } catch (error) {
-      console.error(error);
+    } catch {
       setError("Error calculating taxes, please try again later");
     } finally {
       setLoading(false);
     }
+  };
+
+  const renderYearOptions = () => {
+    const years = Array.from({ length: 4 }, (_, i) => 2019 + i);
+    return years.map((year) => (
+      <option key={year} value={year}>
+        {year}
+      </option>
+    ));
   };
 
   return (
@@ -100,12 +109,19 @@ const Form = () => {
             )}
           </div>
           <div className="grid w-full max-w-sm items-center gap-1.5 m-auto">
-            <Label htmlFor="year">Fiscal Year:</Label>
-            <Input
-              id={"year"}
-              type="number"
-              {...register("year", { required: true, min: 2019, max: 2022 })}
-            />
+            <Label htmlFor="year-select">Fiscal Year:</Label>
+
+            <select
+              id={"year-select"}
+              className={
+                "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+              }
+              {...register("year", { required: true })}
+            >
+              <option value={""}>Select a year</option>
+              {renderYearOptions()}
+            </select>
+
             {errors.year?.type === "required" && (
               <span className={"text-red-600"}>This field is required</span>
             )}

@@ -1,6 +1,6 @@
 export type Inputs = {
   salary: number;
-  year: number;
+  year: string;
 };
 
 export interface TaxBracket {
