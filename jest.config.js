@@ -7,7 +7,9 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testEnvironment: "jest-environment-jsdom",
-  transformIgnorePatterns: ["/node_modules/(?!lucide-react)"],
+  transformIgnorePatterns: [
+    "/node_modules/(?!lucide-react)", // Transpilar lucide-react
+  ],
 };
 
 module.exports = createJestConfig(customJestConfig);
