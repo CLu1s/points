@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Form from "../components/ui/Form";
+import Form from "../components/Form";
 import axios from "axios";
 
 jest.mock("axios");

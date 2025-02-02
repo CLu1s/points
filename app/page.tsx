@@ -1,6 +1,6 @@
-import Form from "@/components/ui/Form";
+import Form from "@/components/Form";
 import { Calculator } from "lucide-react";
-import Footer from "@/components/ui/Footer";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (

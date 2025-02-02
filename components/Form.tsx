@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { BandResult, Inputs } from "@/types/FormTypes";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
   Card,
   CardContent,
@@ -11,15 +11,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/Card";
+import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
 import formatMoney from "@/lib/formatMoney";
-import Result from "@/components/ui/Result";
+import Result from "@/components/Result";
 import { calculateTax } from "@/lib/calculateTax";
-import Spinner from "@/components/ui/Spinner";
-
-const ENDPOINT = "http://localhost:5001/tax-calculator/tax-year";
+import Spinner from "@/components/Spinner";
+import { fetchTaxBrackets } from "@/services/taxService";
 
 const Form = () => {
   const [result, setResult] = useState<BandResult[] | null>(null);
@@ -41,13 +40,11 @@ const Form = () => {
     setResult(null);
     setError(null);
     try {
-      const response = await axios.get(`${ENDPOINT}/${year}`);
-      if (!response.data || response.status !== 200) {
-        throw new Error("Invalid API response");
-      }
+      const data = await fetchTaxBrackets(year);
+
       const { total, breakdown } = calculateTax(
         Number(salary),
-        response.data.tax_brackets,
+        data.tax_brackets,
       );
       setTotalTax(formatMoney(total));
       setEffectiveRate(
